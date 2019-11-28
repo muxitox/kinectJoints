@@ -360,7 +360,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                             this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
 
                             // Write wrist position and hand orientation
-                            this.WriteJoint(body);
+                            if (!this.WriteJoint(body)) { Environment.Exit(0); }
                         }
                     }
 
@@ -372,32 +372,59 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
 
         // Saves the joint state to a .csv file
-        private void WriteJoint(Body body)
+        private Boolean WriteJoint(Body body)
         {
             CameraSpacePoint rightWristPosition = body.Joints[JointType.WristRight].Position;
+            CameraSpacePoint spineBasePosition = body.Joints[JointType.SpineBase].Position;
+            CameraSpacePoint rightHandPosition = body.Joints[JointType.HandRight].Position;
+            CameraSpacePoint rightThumbPosition = body.Joints[JointType.ThumbRight].Position;
+
             Vector4 rightHandOrientation = body.JointOrientations[JointType.HandRight].Orientation;
 
-            Single x = rightWristPosition.X;
-            Single y = rightWristPosition.Y;
-            Single z = rightWristPosition.Z;
+            // The change the coordinate frame with respect to Baxter according to the rotation matrix
+            Single xW = spineBasePosition.Z - rightWristPosition.Z;
+            Single yW = spineBasePosition.X - rightWristPosition.X;
+            Single zW = rightWristPosition.Y - spineBasePosition.Y;
 
-            Single hw = rightHandOrientation.W;
-            Single hx = rightHandOrientation.X;
-            Single hy = rightHandOrientation.Y;
-            Single hz = rightHandOrientation.Z;
+            Single xH = spineBasePosition.Z - rightHandPosition.Z;
+            Single yH = spineBasePosition.X - rightHandPosition.X;
+            Single zH = rightHandPosition.Y - spineBasePosition.Y;
+
+            Single xT = spineBasePosition.Z - rightThumbPosition.Z;
+            Single yT = spineBasePosition.X - rightThumbPosition.X;
+            Single zT = rightThumbPosition.Y - spineBasePosition.Y;
+
+
+
 
             String filePath = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\data1.csv";
-            
-            String line = x.ToString() + " " + y.ToString() + " " +z.ToString() + " " + 
-                hw.ToString() + " " +  hx.ToString() + " " + hy.ToString() + " " + hz.ToString();
 
-            Console.WriteLine(line);
+            String line = xW.ToString() + " " + yW.ToString() + " " + zW.ToString() + " " +
+                xH.ToString() + " " + yH.ToString() + " " + zH.ToString() + " " +
+                xT.ToString() + " " + yT.ToString() + " " + zT.ToString();
 
-            using (StreamWriter file =
-            new StreamWriter(filePath, true))
+
+            switch (body.HandRightState)
             {
-                file.WriteLine(line);
+                    
+                case HandState.Lasso:
+                    Console.WriteLine("Lasso");
+                    return false;                 
+                
+                default:
+                    Console.WriteLine("DEFAULT");
+                    Console.WriteLine(line);
+
+                    using (StreamWriter file =
+                    new StreamWriter(filePath, true))
+                    {
+                        file.WriteLine(line);
+                    }
+
+                    return true;
             }
+
+           
 
         }
 
