@@ -1,9 +1,3 @@
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe.config
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.pdb
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.dll
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.xml
-C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csprojAssemblyReference.cache
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\MainWindow.baml
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\MainWindow.g.cs
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\App.g.cs
@@ -11,6 +5,12 @@ C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debu
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.g.resources
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.BodyBasics.Properties.Resources.resources
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csproj.GenerateResource.cache
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe.config
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.pdb
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.dll
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.xml
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csproj.CopyComplete
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.exe
 C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.pdb
+C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csprojAssemblyReference.cache

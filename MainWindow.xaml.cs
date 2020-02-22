@@ -127,6 +127,10 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         /// </summary>
         private string statusText = null;
 
+        private DateTime initialTime;
+
+        private String dateString;
+
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
@@ -216,6 +220,13 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
             // initialize the components (controls) of the window
             this.InitializeComponent();
+
+            // initialize date for the filename
+            DateTime thisDay = DateTime.Now;
+            this.dateString = thisDay.ToString("d").Replace('/', '-') + "-" + thisDay.Hour + "-" + thisDay.Minute + "-" + thisDay.Second;
+
+            // initialize the time counter
+            this.initialTime = DateTime.Now;
         }
 
         /// <summary>
@@ -379,7 +390,8 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             CameraSpacePoint rightHandPosition = body.Joints[JointType.HandRight].Position;
             CameraSpacePoint rightThumbPosition = body.Joints[JointType.ThumbRight].Position;
 
-            Vector4 rightHandOrientation = body.JointOrientations[JointType.HandRight].Orientation;
+            // Save the elbow as well in case we want it in the future
+            CameraSpacePoint rightElbowPosition = body.Joints[JointType.ElbowRight].Position;
 
             // The change the coordinate frame with respect to Baxter according to the rotation matrix
             Single xW = spineBasePosition.Z - rightWristPosition.Z;
@@ -394,29 +406,54 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             Single yT = spineBasePosition.X - rightThumbPosition.X;
             Single zT = rightThumbPosition.Y - spineBasePosition.Y;
 
+            Single xE = spineBasePosition.Z - rightElbowPosition.Z;
+            Single yE = spineBasePosition.X - rightElbowPosition.X;
+            Single zE = rightElbowPosition.Y - spineBasePosition.Y;
 
 
+            DateTime finalTime = DateTime.Now;
 
-            String filePath = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\data1.csv";
+            Double ElapsedTime = (finalTime - this.initialTime).TotalSeconds;
 
-            String line = xW.ToString() + " " + yW.ToString() + " " + zW.ToString() + " " +
-                xH.ToString() + " " + yH.ToString() + " " + zH.ToString() + " " +
-                xT.ToString() + " " + yT.ToString() + " " + zT.ToString();
+            String name = "horizontal";
+            String filePathAll = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\" + this.dateString +
+                                "-" + name + ".csv";
+            String filePathHigh = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\HighConf\" + this.dateString +
+                                "-" + name + ".csv";
 
+            String line =   ElapsedTime.ToString(CultureInfo.InvariantCulture) + "," +
+                            xW.ToString(CultureInfo.InvariantCulture) + "," + yW.ToString(CultureInfo.InvariantCulture) 
+                            + "," + zW.ToString(CultureInfo.InvariantCulture) + "," +
+                            xH.ToString(CultureInfo.InvariantCulture) + "," + yH.ToString(CultureInfo.InvariantCulture) 
+                            + "," + zH.ToString(CultureInfo.InvariantCulture) + "," +
+                            xT.ToString(CultureInfo.InvariantCulture) + "," + yT.ToString(CultureInfo.InvariantCulture)
+                            + "," + zT.ToString(CultureInfo.InvariantCulture) + "," +
+                            xT.ToString(CultureInfo.InvariantCulture) + "," + yT.ToString(CultureInfo.InvariantCulture)
+                            + "," + zT.ToString(CultureInfo.InvariantCulture);
 
+            TrackingConfidence conf = body.HandRightConfidence;
             switch (body.HandRightState)
             {
                     
-                case HandState.Lasso:
-                    Console.WriteLine("Lasso");
-                    return false;                 
-                
+                /*
+                case HandState.Closed:
+                    Console.WriteLine("Closed");
+                    return false; */
+                case HandState.NotTracked:
+                    //Do nothing
                 default:
-                    Console.WriteLine("DEFAULT");
-                    Console.WriteLine(line);
+                    //Console.WriteLine("DEFAULT");
 
-                    using (StreamWriter file =
-                    new StreamWriter(filePath, true))
+                    // Use coordinates only if confidence is high
+                    if (conf.Equals(TrackingConfidence.High))
+                    {
+                        using (StreamWriter file = new StreamWriter(filePathHigh, true))
+                        {
+                            file.WriteLine(line);
+                        }
+                    }
+
+                    using (StreamWriter file = new StreamWriter(filePathAll, true))
                     {
                         file.WriteLine(line);
                     }
