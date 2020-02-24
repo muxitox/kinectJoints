@@ -415,10 +415,10 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
             Double ElapsedTime = (finalTime - this.initialTime).TotalSeconds;
 
-            String name = "horizontal";
-            String filePathAll = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\" + this.dateString +
+            String name = "NEW_ROTZ";
+            String filePathAll = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\Data\" + this.dateString +
                                 "-" + name + ".csv";
-            String filePathHigh = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\Data\HighConf\" + this.dateString +
+            String filePathHigh = @"C:\Users\Usuario\Documents\Universidad\Master\TFM\Kinect\BodyBasics-WPF\Data\HighConf\" + this.dateString +
                                 "-" + name + ".csv";
 
             String line =   ElapsedTime.ToString(CultureInfo.InvariantCulture) + "," +
